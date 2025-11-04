@@ -1,1 +1,3 @@
-alus
+autor: Rasmus Olesk
+
+õppeaine

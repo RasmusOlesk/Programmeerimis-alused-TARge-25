@@ -11,8 +11,8 @@ def calculate(arv1: float, arv2: float, operation: str) -> str:
 
 
 if __name__ == '__main__':
-    esimene = input("Sisestage esimene arv: ")
-    teine = input("Sisestage teine arv: ")
-    op = input("Sisestage tehe: ")
-    print(f"Tulemus: {calculate(esimene, teine, op)}")
+    arv1 = input("Sisestage esimene arv: ")
+    arv2 = input("Sisestage teine arv: ")
+    operation = input("Sisestage tehe: ")
+    print(f"Tulemus: {calculate(arv1, arv2, operation)}")
 

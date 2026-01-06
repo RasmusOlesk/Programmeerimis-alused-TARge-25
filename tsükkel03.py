@@ -1,13 +1,30 @@
-from random import randint
+from random import randint, choice
 
-def get_addition_calculation(min_value: int, max_value: int) -> tuple[str, int]:
+operations = ["+", "-", "*", "**", "//"]
+
+def get_calculation(min_value: int, max_value: int) -> tuple[str, int]:
     num1 = randint(min_value, max_value)
     num2 = randint(min_value, max_value)
-    correct_answer = num1 + num2
-    return f"{num1} + {num2} = ", correct_answer
+    operation = choice(operations)
+    if operation == "+":
+        correct_answer = num1 + num2
+        return f"{num1} {operation} {num2} = ", correct_answer
+    elif operation == "-":
+        correct_answer = num1 - num2
+        return f"{num1} {operation} {num2} = ", correct_answer
+    elif operation == "*":
+        correct_answer = num1 * num2
+        return f"{num1} {operation} {num2} = ", correct_answer
+    elif operation == "**":
+        correct_answer = num1 ** num2
+        return f"{num1} {operation} {num2} = ", correct_answer
+    elif operation == "//":
+        correct_answer = num1 // num2
+        return f"{num1} {operation} {num2} = ", correct_answer
+    return "Tundmatu tehe", 0
 
 def test_user_knowledge(min_value: int, max_value: int) -> tuple [bool, int]:
-    calculation, correct_answer = get_addition_calculation(min_value, max_value)
+    calculation, correct_answer = get_calculation(min_value, max_value)
     user_answer = int(input(calculation))
     return user_answer == correct_answer, correct_answer
 
@@ -24,7 +41,7 @@ def practice_addition(count: int, min_value: int, max_value: int) -> None:
     print(f"See oli viimane ülesanne. Kogusid {count}-st punktist {correct_count}.")
 
 if __name__ == '__main__':
-    min_value = 1
-    max_value = 50
-    count = 10
+    count = int(input("Mitu korda soovid harjutada?"))
+    min_value = int(input("Milline peaks olema väikseim täisarv harjutuses? "))
+    max_value = int(input("Milline peaks olema suurim täisarv harjutuses?"))
     practice_addition(count, min_value, max_value)

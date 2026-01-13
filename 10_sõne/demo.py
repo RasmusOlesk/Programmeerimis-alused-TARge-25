@@ -1,0 +1,1 @@
+"sõne".isalpha()

@@ -35,7 +35,7 @@ def powerful_operations(num_a: int, num_b: int) -> tuple:
 def find_average(num_a: int, num_b: int) -> float:
     """Return the average of given variables."""
     # Write your code here
-    average = num_a / num_b
+    average = (num_a + num_b) / 2
     return average
 
 
@@ -53,21 +53,24 @@ def area_of_an_equilateral_triangle(side_length: float) -> int:
     return round(triangle_area)
 
 
-def calculate_discriminant(a: int, b: int, c: int) -> int:
+def calculate_discriminant(num_a: int, num_b: int, num_c: int) -> int:
     """Calculate discriminant with given variables and return the result."""
     # Write your code here
+    discriminant = (num_b**2) - (4 * num_a * num_c)
     return discriminant
 
 
-def calculate_hypotenuse_length(a: int, b: int) -> float:
+def calculate_hypotenuse_length(num_a: int, num_b: int) -> float:
     """Return the length of hypotenuse when the lengths of the catheti are given."""
     # Write your code here
+    c = math.sqrt(num_a ** 2 + num_b ** 2)
     return c
 
 
-def calculate_cathetus_length(a: int, c: int) -> float:
+def calculate_cathetus_length(num_a: int, num_c: int) -> float:
     """Return the length of cathetus when the lengths of the second cathetus and hypotenuse are given."""
     # Write your code here
+    b = math.sqrt(num_c ** 2 - num_a ** 2)
     return b
 
 if __name__ == '__main__':
@@ -82,7 +85,7 @@ if __name__ == '__main__':
     assert 4.99 < float_division_result < 5.01
 
     integer_division_result = integer_division(10, 10)
-    assert isinstance(integer_division_result, int) , f"Result should be of type int but it is: ${type(integer_division_result)}"
+    assert isinstance(integer_division_result, int), f"Result should be of type int but it is: ${type(integer_division_result)}"
     assert integer_division_result == 1
     integer_division_result = integer_division(10, 2)
     assert integer_division_result == 5
@@ -102,5 +105,15 @@ if __name__ == '__main__':
 
     area_of_a_circle = area_of_a_circle(3)
     assert 28.269 < area_of_a_circle < 28.271, f"{area_of_a_circle_result}"
+
+    discriminant = calculate_discriminant(10, 3, 4)
+    assert discriminant == 52
+
+    c = calculate_hypotenuse_length(3, 4)
+    assert c == 5
+
+    b = calculate_cathetus_length(2, 6)
+    assert b == 7
+
 
     triangle_area = triangle_area()

@@ -1,0 +1,2 @@
+"""Koosta programm, mis sisaldab sõnastikku koodidega ning mis suudab kasutaja poolt sisestatud teksti selle alusel kodeerida ja dekodeerida salakirja.
+ Leia mingi sobiv moodus, kuidas kasutaja saaks valida teksti krüpteerimise ja dekrüpteerimise vahel. """

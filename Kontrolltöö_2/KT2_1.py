@@ -1,88 +1,93 @@
 telefoniraamat = {}
 
-def lae_failist():
+"""Siin Laeb telefoniraamatu andmed failist telefoniraamat.txt"""
+def download_from_file():
     try:
         with open("telefoniraamat.txt", "r", encoding="utf-8") as f:
-            for rida in f:
-                rida = rida.strip()
-                if ";" in rida:
-                    nimi, number = rida.split(";", 1)
-                    telefoniraamat[nimi] = number
+            for row in f:
+                row = row.strip()
+                if ", Telefoninumber: " in row:
+                    name, number = row.split(", Telefoninumber: ", 1)
+                    telefoniraamat[name] = number
     except FileNotFoundError:
-        pass  # Faili pole veel – alustame tühjalt
+        pass
 
-def salvesta_faili():
+"""Salvestab telefoniraamatu sisu faili telefoniraamat.txt"""
+def save_file():
     with open("telefoniraamat.txt", "w", encoding="utf-8") as f:
-        for nimi, number in telefoniraamat.items():
-            f.write(f"{nimi}, Telefoninumber: {number}\n")
+        for name, number in telefoniraamat.items():
+            f.write(f"{name}, Telefoninumber: {number}\n")
 
+"""Lisab uue kontakti telefoniraamatusse."""
 def lisa_kontakt():
-    nimi = input("Sisesta nimi: ")
+    name = input("Sisesta nimi: ")
     number = input("Sisesta telefoninumber: ")
-    telefoniraamat[nimi] = number
-    salvesta_faili()
-    print(f"Lisatud: {nimi} – {number}\n")
+    telefoniraamat[name] = number
+    save_file()
+    print(f"Lisatud: {name} – {number}\n")
 
-def otsi_kontakt():
+"""Otsib kontakti kas nime või telefoninumbri järgi"""
+def search_contact():
     print("1. Otsi nime järgi")
     print("2. Otsi numbri järgi")
-    valik = input("Vali otsingu tüüp: ")
-    if valik == "1":
-        nimi = input("Sisesta nimi: ")
-        if nimi in telefoniraamat:
-            print(f"{nimi} number on {telefoniraamat[nimi]}\n")
+    choice = input("Vali otsingu tüüp: ")
+    if choice == "1":
+        name = input("Sisesta nimi: ")
+        if name in telefoniraamat:
+            print(f"{name} number on {telefoniraamat[name]}\n")
         else:
             print("Sellist nime ei leitud.")
-            lisa = input("Kas soovid selle nime lisada? (jah/ei): ")
-            if lisa.lower() == "jah":
+            add = input("Kas soovid selle nime lisada? (jah/ei): ")
+            if add.lower() == "jah":
                 number = input("Sisesta telefoninumber: ")
-                telefoniraamat[nimi] = number
-                salvesta_faili()
-                print(f"Lisatud: {nimi} – {number}\n")
-    elif valik == "2":
+                telefoniraamat[name] = number
+                save_file()
+                print(f"Lisatud: {name} – {number}\n")
+    elif choice == "2":
         number = input("Sisesta telefoninumber: ")
-        leitud = False
-        for nimi, num in telefoniraamat.items():
+        found = False
+        for name, num in telefoniraamat.items():
             if num == number:
-                print(f"Numbrile {number} vastab nimi {nimi}\n")
-                leitud = True
+                print(f"Numbrile {number} vastab nimi {name}\n")
+                found = True
                 break
-        if not leitud:
+        if not found:
             print("Sellist numbrit ei leitud.")
-            lisa = input("Kas soovid selle numbri lisada? (jah/ei): ")
-            if lisa.lower() == "jah":
+            add = input("Kas soovid selle numbri lisada? (jah/ei): ")
+            if add.lower() == "jah":
                 nimi = input("Sisesta nimi: ")
-                telefoniraamat[nimi] = number
-                salvesta_faili()
-                print(f"Lisatud: {nimi} – {number}\n")
+                telefoniraamat[name] = number
+                save_file()
+                print(f"Lisatud: {name} – {number}\n")
     else:
         print("Tundmatu valik.\n")
 
-def kuva_koik():
+"""Kuvab kogu telefoniraamatu sisu"""
+def show_all():
     print("\n--- Kogu telefoniraamat ---")
     if not telefoniraamat:
         print("Telefoniraamat on tühi.\n")
         return
-    for nimi, number in telefoniraamat.items():
-        print(f"{nimi}: {number}")
+    for name, number in telefoniraamat.items():
+        print(f"{name}: {number}")
     print()
 
 
 if __name__ == "__main__":
-    lae_failist()
+    download_from_file()
     while True:
         print("1. Lisa kontakt")
         print("2. Otsi kontakti")
         print("3. Kuva kogu telefoniraamat")
         print("4. Lõpeta")
-        valik = input("Vali tegevus: ")
-        if valik == "1":
+        choice = input("Vali tegevus: ")
+        if choice == "1":
             lisa_kontakt()
-        elif valik == "2":
-            otsi_kontakt()
-        elif valik == "3":
-            kuva_koik()
-        elif valik == "4":
+        elif choice == "2":
+            search_contact()
+        elif choice == "3":
+            show_all()
+        elif choice == "4":
             print("Programmi töö lõpetatud.")
             break
         else:

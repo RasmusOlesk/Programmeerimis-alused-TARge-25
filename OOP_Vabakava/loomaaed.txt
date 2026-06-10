@@ -1,0 +1,2 @@
+q;Lion;3;100
+t;Elephant;6;100
